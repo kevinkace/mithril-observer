@@ -10,10 +10,10 @@ test("new Observer has observable()", () => {
     expect(typeof observer.observe).toBe("function");
 });
 
-test("new Observer has onbeforeremove", () => {
+test("new Observer has onbeforeupdate", () => {
     const observer = new Observer();
 
-    expect(typeof observer.onbeforeremove).toBe("function");
+    expect(typeof observer.onbeforeupdate).toBe("function");
 });
 
 test("new Observer.observe() returns a stream", () => {

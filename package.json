@@ -13,6 +13,7 @@
     "mithril-stream": "^1.1.0"
   },
   "devDependencies": {
+    "http-server": "^0.11.1",
     "jest": "^23.0.0"
   }
 }

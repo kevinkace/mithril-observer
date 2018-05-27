@@ -1,4 +1,10 @@
-const stream = require("mithril-stream");
+let stream;
+
+if(typeof require) {
+    stream = require("mithril-stream");
+} else {
+    stream = m.stream;
+}
 
 function Observer() {
     this.dirty = false;
