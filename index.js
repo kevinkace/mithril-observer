@@ -5,18 +5,18 @@ function Observer() {
     this.streams = [];
 }
 
-Observer.prototype.observable = function observable(...values) {
-    let returnValues = [];
+Observer.prototype.observe = function observe(...values) {
+    let returnStreams = [];
 
     values.forEach((value) => {
-        returnValues.push(stream(value));
+        returnStreams.push(stream(value));
     });
 
-    stream.merge(streams).map(() => {
+    stream.merge(returnStreams).map(() => {
         dirty = true;
     });
 
-    return returnValues.length === 1 ? returnValues.pop() : returnValues;
+    return returnStreams.length === 1 ? returnStreams.pop() : returnStreams;
 };
 
 Observer.prototype.onbeforeremove = function onbeforeremove() {
@@ -28,3 +28,5 @@ Observer.prototype.onbeforeremove = function onbeforeremove() {
 
     return false;
 };
+
+module.exports = Observer;
