@@ -1,9 +1,11 @@
 const stream = require("mithril-stream");
 
-let dirty;
-let streams = [];
+function Observer() {
+    this.dirty = false;
+    this.streams = [];
+}
 
-function observable(...values) {
+Observer.prototype.observable = function observable(...values) {
     let returnValues = [];
 
     values.forEach((value) => {
@@ -15,9 +17,9 @@ function observable(...values) {
     });
 
     return returnValues.length === 1 ? returnValues.pop() : returnValues;
-}
+};
 
-function onbeforeremove() {
+Observer.prototype.onbeforeremove = function onbeforeremove() {
     if(dirty) {
         dirty = false;
 
@@ -25,8 +27,4 @@ function onbeforeremove() {
     }
 
     return false;
-}
-
-function observer() {
-    return {}
-}
+};
