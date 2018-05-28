@@ -38,8 +38,6 @@ export default [{
             commonjs({
               include   : 'node_modules/**',
               sourceMap : false
-
-            //   namedExports: { './module.js': ['foo', 'bar' ] }
             })
           ]
 }];
