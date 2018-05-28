@@ -6,7 +6,7 @@ m.mount(document.getElementById("mount"), {
     },
     view : (vnode) => {
         // track everytime view() is called
-        viewCount.push(Date.now());
+        viewCount.unshift(Date.now());
 
         return [,
             m("div", vnode.state.count()),
@@ -26,7 +26,8 @@ m.mount(document.getElementById("mount"), {
                     console.log("clicked");
                 }
             }, "console.log"),
-            m("pre", viewCount.reverse().join("\n"))
+            m("div", "timestamp everytime view() has been called:"),
+            m("pre", viewCount.join("\n"))
         ];
     }
 });

@@ -1,4 +1,4 @@
-const observer = require("../index.js");
+const observer = require("./mithril-observer");
 
 // gen fake vnode obj
 function mockVnode() {

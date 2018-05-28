@@ -1,6 +1,6 @@
-const stream = require("mithril-stream");
+import stream from "mithril-stream";
 
-module.exports = function observer(vnode, ...values) {
+export default function observer(vnode, ...values) {
     let dirty = false,
         first = true;
 
