@@ -11,12 +11,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "mithril-stream": "^1.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "http-server": "^0.11.1",
     "jest": "^23.0.0",
+    "mithril-stream": "^1.1.0",
     "rollup": "^0.59.4",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0"
