@@ -1,18 +1,12 @@
-const redraws = [];
-console.log("test");
-
+const viewCount = [];
 
 m.mount(document.getElementById("mount"), {
     oninit : (vnode) => {
-        const ob = new Observer(vnode);
-
-        window.ob = ob;
-
-        vnode.state.count = ob.serve(0);
+        vnode.state.count = observer(vnode, 0);
     },
     view : (vnode) => {
         // track everytime view() is called
-        redraws.push(Date.now());
+        viewCount.push(Date.now());
 
         return [,
             m("div", vnode.state.count()),
@@ -29,11 +23,10 @@ m.mount(document.getElementById("mount"), {
             m.trust("<br>"),
             m("button", {
                 onclick : () => {
-                    console.log(vnode);
                     console.log("clicked");
                 }
             }, "console.log"),
-            m("pre", redraws.reverse().join("\n"))
+            m("pre", viewCount.reverse().join("\n"))
         ];
     }
 });

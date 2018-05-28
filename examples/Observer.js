@@ -1,38 +1,38 @@
 const stream = m.stream;
 
-function Observer(vnode) {
-    this.dirty = false;
-    this.streams = [];
-    this.returnStreams = [];
-    this.first = true;
+function observer(vnode, ...values) {
+    let dirty = false,
+        first = true;
 
-    vnode.state.onbeforeupdate = this.onbeforeupdate;
-}
+    if(!vnode || values.length >= 1) {
+        throw new Error("Required parameters");
+    }
 
-Observer.prototype.serve = function serve(...values) {
-    values.forEach((value) => {
-        this.returnStreams.push(stream(value));
-    });
+    // create array of streams of input values
+    const returnStreams = values.map((value) => stream(value));
 
-    stream.merge(this.returnStreams).map(() => {
-        if(this.first) {
-            this.first = false;
+    // merge and map streams, to set dirty state when values are updated
+    stream.merge(returnStreams).map(() => {
+        if(first) {
+            first = false;
 
             return;
         }
 
-        this.dirty = true;
+        dirty = true;
     });
 
-    return this.returnStreams.length === 1 ? this.returnStreams.pop() : this.returnStreams;
-};
+    // set onbeforeupdate() using dirty check
+    vnode.state.onbeforeupdate = function() {
+        if(!dirty) {
+            return false;
+        }
 
-Observer.prototype.onbeforeupdate = function onbeforeupdate() {
-    if(this.dirty) {
-        this.dirty = false;
+        dirty = false;
 
         return true;
     }
 
-    return false;
-};
+    // return single value or array based on arity
+    return returnStreams.length === 1 ? returnStreams.pop() : returnStreams;
+}

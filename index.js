@@ -1,38 +1,42 @@
-let stream;
+const stream = require("mithril-stream");
 
-if(typeof require) {
-    stream = require("mithril-stream");
-} else {
-    stream = m.stream;
-}
+module.exports = function observer(vnode, ...values) {
+    let dirty = false,
+        first = true;
 
-function Observer() {
-    this.dirty = false;
-    this.streams = [];
-}
+    if(!vnode) {
+        throw new Error("Required parameter: vnode");
+    }
 
-Observer.prototype.observe = function observe(...values) {
-    let returnStreams = [];
+    if(values.length === 0) {
+        throw new Error("Required parameter: values");
+    }
 
-    values.forEach((value) => {
-        returnStreams.push(stream(value));
-    });
+    // create array of streams for input values
+    const returnStreams = values.map((value) => stream(value));
 
+    // merge and map streams, to set dirty state when values are updated
     stream.merge(returnStreams).map(() => {
+        if(first) {
+            first = false;
+
+            return;
+        }
+
         dirty = true;
     });
 
-    return returnStreams.length === 1 ? returnStreams.pop() : returnStreams;
-};
+    // set onbeforeupdate() using dirty check
+    vnode.state.onbeforeupdate = function() {
+        if(!dirty) {
+            return false;
+        }
 
-Observer.prototype.onbeforeremove = function onbeforeremove() {
-    if(dirty) {
         dirty = false;
 
         return true;
     }
 
-    return false;
-};
-
-module.exports = Observer;
+    // return single value or array based on arity
+    return returnStreams.length === 1 ? returnStreams.pop() : returnStreams;
+}
