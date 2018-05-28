@@ -25,7 +25,7 @@ const component = {
 
 ## But why do this?
 
-**Some background on Mithril rendering:** By default Mithril will call a component's `view()` for every redraw, either when triggered by certain event handlers, or by calling m.redraw() directly. The vdom output from the `view()` is then diffed against to the actual DOM and updates are done as necessary.
+**Some background on Mithril rendering:** By default Mithril will call a component's `view()` for every redraw, either when triggered by certain event handlers, or by calling `m.redraw()` directly. The vdom output from the `view()` is then diffed against to the actual DOM and updates are done as necessary. [Read more about Mithril and auto-redraw](https://mithril.js.org/autoredraw.html)
 
 A component's `view()` should be dead simple, and computed values should be handled/cached outside of the `view()`. So when does it make sense to use this? TBH I'm not really sure...
 
