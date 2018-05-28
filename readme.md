@@ -4,7 +4,7 @@
 
 ## What is this?
 
-A small library to be used with [Mitrhil](https://github.com/MithrilJS/mithril.js/) and [Mithril stream()](https://mithril.js.org/stream.html), to prevent calling a component's `view()` except when warrented.
+A small library to be used with [Mitrhil](https://github.com/MithrilJS/mithril.js/) and [Mithril stream()](https://mithril.js.org/stream.html), to prevent calling a component's `view()` except when warranted.
 
 ## How do I use it?
 
@@ -16,7 +16,7 @@ const component = {
         vnode.state.value = observer(vnode, "my value");
     },
     view () =>
-        // renderValue() is slow and processor intensive, so only call when warrented
+        // renderValue() is slow and processor intensive, so only call when warranted
         m("div", renderValue(vnode.state.value()))
 }
 ```
