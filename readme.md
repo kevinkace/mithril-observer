@@ -8,7 +8,7 @@ A small library to be used with [Mitrhil](https://github.com/MithrilJS/mithril.j
 
 ## How do I use it?
 
-The API is dead simple, a **single** function call to instantiate values, and to add an `onbeforeupdate()` function.
+The API is dead simple, a single function call to instantiate values, and to add an `onbeforeupdate()` function.
 
 ```js
 const component = {
