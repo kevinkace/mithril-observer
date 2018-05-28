@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "examples": "http-server examples",
+    "build": "rollup --config"
   },
   "keywords": [],
   "author": "",
