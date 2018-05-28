@@ -23,9 +23,15 @@ const component = {
 
 ### [More examples](examples)
 
+## But why do this?
+
+**Some background on Mithril rendering:** By default Mithril will call a component's `view()` for every redraw, either when triggered by certain event handlers, or by calling m.redraw() directly. The vdom output from the `view()` is then diffed against to the actual DOM and updates are done as necessary.
+
+A component's `view()` should be dead simple, and computed values should be handled/cached outside of the `view()`. So when does it make sense to use this? TBH I'm not really sure...
+
 ## How does this work?
 
-By default Mithril will call a component's `view()` for every redraw, either when triggered by certain event handlers, or by calling `m.redraw()` directly. A component can opt-out of calling it's `view()` by using a [lifecycle method](https://mithril.js.org/hyperscript.html#lifecycle-methods) - `onbeforeupdate()`. When this method returns `false`, the `view()` will not be called.
+A component can opt-out of calling it's `view()` by using a [lifecycle method](https://mithril.js.org/hyperscript.html#lifecycle-methods) - `onbeforeupdate()`. When this method returns `false`, the `view()` will not be called.
 
 Mithril Observer does 2 things:
 
