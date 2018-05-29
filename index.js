@@ -1,5 +1,11 @@
 import stream from "mithril-stream";
 
+/**
+ * This function adds an onbeforeupdate() fn to the vnode, and creates streams from each value
+ * @param {vnode} vnode - the component vnode
+ * @param {...*} values - the values to create streams from
+ * @returns {(array|stream)} a stream of the input value, or an array of streams for each input value
+ */
 export default function observer(vnode, ...values) {
     let dirty = false,
         first = true;
@@ -15,8 +21,10 @@ export default function observer(vnode, ...values) {
     // create array of streams for input values
     const returnStreams = values.map((value) => stream(value));
 
-    // merge and map streams, to set dirty state when values are updated
+    // merge and map streams, map is run anytime a value is updated
+    // set dirty state when values are updated
     stream.merge(returnStreams).map(() => {
+        // opt out from first run as map runs on instatiation
         if(first) {
             first = false;
 
