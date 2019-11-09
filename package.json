@@ -18,6 +18,6 @@
     "mithril-stream": "^2.0.0",
     "rollup": "^1.26.3",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^4.2.4"
+    "rollup-plugin-node-resolve": "^5.2.0"
   }
 }
